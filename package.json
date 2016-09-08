@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "postinstall": "bower install"
   },
   "author": "",
   "license": "ISC",
@@ -16,5 +17,8 @@
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "pug": "^2.0.0-beta6"
+  },
+  "devDependencies": {
+    "bower": "^1.7.9"
   }
 }
