@@ -1,0 +1,21 @@
+{
+  "name": "server",
+  "description": "",
+  "main": "server.js",
+  "authors": [
+    "Caitlin Stein <caitlin.teter@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}
