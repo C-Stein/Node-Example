@@ -5,10 +5,13 @@ const app = express();
 const bodyParser = require('body-parser')
 const { cyan, red } = require('chalk')
 
+const { connect } = require('./database')
+
 const routes = require('./routes/') //ending in "/" defaults to "index"
+const db = require('./database')
 
-
-app.set('PORT', process.env.PORT || 3000);
+ const port = process.env.PORT || 3000
+ app.set('port', port)
 
 app.set('view engine', 'pug');
 app.set('views', 'views');
@@ -61,7 +64,10 @@ app.use((
 )
 
 //listen
-
-app.listen(app.get('PORT'), () => {
-  console.log(`Hey, I'm listening on port ${app.get('PORT')}`);
-})
+connect()
+  .then(() => {
+    app.listen(port, () => {
+    console.log(`Hey, I'm listening on port ${port}`);
+    })
+  })
+  .catch(console.error)

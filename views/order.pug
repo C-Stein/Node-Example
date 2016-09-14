@@ -1,0 +1,31 @@
+extends partials/layout.pug
+
+block content
+  .heading
+    h1 Order A Pizza
+  .contact-form
+    form(method='POST')
+      .form-group
+        label(for='name') Name
+        input.form-control#name(type='text' name='name' placeholder='John Doe')
+      .form-group
+        label(for='email') Email Address
+        input.form-control#email(type='email' name='email' placeholder='you@example.com')
+      .form-group
+        label(for='phone') Phone Number
+        input.form-control#phone(type='tel' name='phone' placeholder='234-567-8901')
+      .form-group
+        label(for='size ') Size
+        select.form-control#size(name = "size")
+          option Select a Size:
+            each size in sizes
+              option(value=size.inches name="size") #{size.name}: #{size.inches}"
+      .form-group
+        label(for='toppings') Toppings
+        .form-check
+          each topping in toppings
+            label.form-check-label(for='olives') #{topping.name}
+              input.form-check-input(type="checkbox" value=topping.name name="toppings")
+      .contact-form__submit
+        a.btn.btn-danger.btn-lg(href='/') Cancel
+        input.btn.btn-success.btn-lg(type='submit' value='Submit')
