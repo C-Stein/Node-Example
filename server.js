@@ -22,12 +22,15 @@ if (process.env.NODE_ENV !== 'production') {
   app.locals.pretty = true;
 }
 
+app.locals.errors = {}
+app.locals.body = {}
+
 //Middlewares
 app.use(bodyParser.urlencoded({ extended: false})) //gives you a req.body
-  
+
 app.use(session({
-  store: new RedisStore(),
-  secret: 'supersecretkey' //fine to put this on github
+  'store': new RedisStore(),
+  'secret': 'supersecretkey' //fine to put this on github
 }))
 
 app.use((req, res, next) => {
