@@ -29,7 +29,9 @@ app.locals.body = {}
 app.use(bodyParser.urlencoded({ extended: false})) //gives you a req.body
 
 app.use(session({
-  'store': new RedisStore(),
+  'store': new RedisStore({
+    url: process.env.REDIS_URL || 'redis://localhost:6379'
+  }),
   'secret': 'supersecretkey' //fine to put this on github
 }))
 
