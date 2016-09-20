@@ -3,6 +3,8 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser')
+const session = require('express-session')
+const RedisStore = require('connect-redis')(session)
 const { cyan, red } = require('chalk')
 
 const { connect } = require('./database')
@@ -21,14 +23,26 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 //Middlewares
+app.use(bodyParser.urlencoded({ extended: false})) //gives you a req.body
+  
+app.use(session({
+  store: new RedisStore(),
+  secret: 'supersecretkey' //fine to put this on github
+}))
+
+app.use((req, res, next) => {
+  app.locals.email = req.session.email
+  console.log("user-mail: ", app.locals.email);
+  next()
+})
 
 app.use(({ method, url, headers: { 'user-agent': agent } }, res, next) => {
   console.log(`[${new Date()}] "${cyan(`${method} ${url}`)}" "${agent}"`)
   next()
 })
 
+
 app.use(express.static('public'))
-app.use(bodyParser.urlencoded({ extended: false})) //gives you a req.body
 
 
 app.use(routes)//"routes" has to be a function

@@ -1,6 +1,9 @@
 extends partials/layout.pug
 
 block content
+  if errors
+    each err in errors
+      h1= err.message
   .heading
     h1 Order A Pizza
   .contact-form
